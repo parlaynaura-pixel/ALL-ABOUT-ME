@@ -1,4 +1,46 @@
-<!DOCTYPE html>
+  resize();
+  window.addEventListener("resize", resize);
+
+  const flakes = Array.from({ length: 120 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 3 + 1,
+    d: Math.random() * 1.5 + 0.5
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.beginPath();
+
+    flakes.forEach(f => {
+      ctx.moveTo(f.x, f.y);
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    });
+
+    ctx.fill();
+    move();
+    requestAnimationFrame(draw);
+  }
+
+  function move() {
+    flakes.forEach(f => {
+      f.y += f.d;
+      if (f.y > canvas.height) {
+        f.y = -5;
+        f.x = Math.random() * canvas.width;
+      }
+    });
+  }
+
+  draw();
+});
+
+
+
+		
+    </script>
+	<canvas id="snow"></canvas><!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -29,15 +71,14 @@
         }
 
         body {
-    background-image: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizx7b230N7SjQzn9CoZwrrx0s4qqZ92qA-x_DjfC1D4Mzv_tFk1ilBqyR-wshW9Sg0eHgkufPzLRn4YblA-UjtzjvEeRUC8BL7AlYH41st66FzKKKG-zOIhB0SqOVtBaT5mx0b5tkkaoONBSGrP8YNW3S3uv0j7LSzvPLykwP9rAFtPdzZ8SXNbn6z8_E/w420-h420/photo_2025-09-26_08-45-59.jpg"); 
-    background-size: cover;          
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;    
-    
-    color: #ccebff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    overflow-x: hidden;
+            background: linear-gradient(
+			135deg, 
+			#0f0f1e 0%, 
+			#1a0f2e 50%, 
+			#0f1f2e 100%);
+            color: #ccebff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
         }
 
         .container {
@@ -399,7 +440,7 @@
         .winners-header {
             background: linear-gradient(to right, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
             padding: 15px 20px;
-            border-bottom: 1px solid rgba(255, 215, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             font-weight: bold;
             font-size: 1.1rem;
         }
@@ -756,8 +797,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
     <script>
-        const PRIZES = ["25K", "50K", "75K", "100K", "150K", "200K"];
-        const PRIZE_AMOUNTS = ["25.000", "50.000", "75.000", "100.000", "150.000", "2.000.000"];
+        const PRIZES = ["250K", "500K", "750K", "1JT", "1,5JT", "2JT"];
+        const PRIZE_AMOUNTS = ["250.000", "500.000", "750.000", "1.000.000", "1.500.000", "2.000.000"];
         
         let hasSpun = localStorage.getItem("hasSpun") === "true";
         let isSpin = false;
